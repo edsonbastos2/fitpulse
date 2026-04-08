@@ -12,6 +12,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "@nuxtjs/supabase": "^1.4.6",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@vueuse/core": "^12.5.0",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@nuxt/eslint": "^1.2.0",
     "@types/node": "^22.13.9",
+    "@vite-pwa/nuxt": "^1.1.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.21.0",
     "postcss": "^8.5.3",

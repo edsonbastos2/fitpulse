@@ -4,8 +4,8 @@
     <section class="relative overflow-hidden">
       <!-- Background Effects -->
       <div class="absolute inset-0">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl"/>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl"/>
       </div>
 
       <!-- Nav -->
@@ -180,7 +180,7 @@
         <div class="card-gradient rounded-3xl p-8 lg:p-16 text-center relative overflow-hidden">
           <!-- Background Effects -->
           <div class="absolute inset-0 opacity-30">
-            <div class="absolute top-0 left-0 w-full h-full bg-gradient-mesh animate-gradient"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-mesh animate-gradient"/>
           </div>
 
           <div class="relative z-10">

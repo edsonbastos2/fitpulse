@@ -13,8 +13,8 @@
         </NuxtLink>
 
         <button
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
           class="btn-icon"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
         >
           <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -111,7 +111,7 @@
 <script setup lang="ts">
 import {
   HomeIcon,
-  DumbbellIcon,
+  WrenchScrewdriverIcon,
   CalendarIcon,
   ChartBarIcon,
   UserIcon,
@@ -119,7 +119,7 @@ import {
 } from '@heroicons/vue/24/outline'
 
 const route = useRoute()
-const { user } = useSupabaseUser()
+const user = useSupabaseUser()
 
 const isMobileMenuOpen = ref(false)
 
@@ -134,7 +134,7 @@ const navigation = computed(() => [
 ])
 
 const userInitials = computed(() => {
-  const name = user.value?.name || 'U'
+  const name = (user.value?.user_metadata?.name as string) || 'U'
   return name
     .split(' ')
     .map((n) => n[0])
@@ -147,10 +147,10 @@ const isActive = (path: string) => {
   return route.path === path || route.path.startsWith(path + '/')
 }
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, unknown> = {
   home: HomeIcon,
-  dumbbell: DumbbellIcon,
-  exercises: DumbbellIcon,
+  dumbbell: WrenchScrewdriverIcon,
+  exercises: WrenchScrewdriverIcon,
   calendar: CalendarIcon,
   chart: ChartBarIcon,
   user: UserIcon,

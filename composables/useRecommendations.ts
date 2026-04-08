@@ -123,8 +123,8 @@ export const useRecommendations = () => {
 
       recommendations.value = recommendationsList
       return recommendationsList
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return []
     } finally {
       isLoading.value = false
@@ -133,7 +133,7 @@ export const useRecommendations = () => {
 
   // Analyze which muscle groups have been worked
   const analyzeMuscleBalance = (
-    sessions: any[]
+    _sessions: unknown[]
   ): { muscleId: string; muscleName: string; percentage: number }[] => {
     // This would analyze workout history to find imbalanced muscle groups
     // For now, return mock data
@@ -150,11 +150,11 @@ export const useRecommendations = () => {
   // Get reason for workout recommendation
   const getWorkoutReason = (
     workout: Workout,
-    weakMuscles: any[],
+    _weakMuscles: unknown[],
     userProfile: UserProfile
   ): string => {
-    if (weakMuscles.length > 0) {
-      return `Ideal para fortalecer ${weakMuscles[0].muscleName}`
+    if (_weakMuscles.length > 0) {
+      return `Ideal para fortalecer ${(_weakMuscles[0] as { muscleName: string }).muscleName}`
     }
     if (userProfile.goals?.includes('muscle_gain')) {
       return 'Perfeito para hipertrofia'

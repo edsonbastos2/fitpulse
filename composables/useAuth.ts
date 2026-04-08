@@ -1,4 +1,4 @@
-import type { User, UserProfile } from '~/types'
+import type { UserProfile } from '~/types'
 
 export const useAuth = () => {
   const supabase = useSupabaseClient()
@@ -26,8 +26,8 @@ export const useAuth = () => {
 
       profile.value = data as UserProfile
       return data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     } finally {
       isLoading.value = false
@@ -53,9 +53,9 @@ export const useAuth = () => {
 
       profile.value = data as UserProfile
       return { data, error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { data: null, error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { data: null, error: (err as Error).message }
     } finally {
       isLoading.value = false
     }

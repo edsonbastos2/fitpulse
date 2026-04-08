@@ -48,8 +48,8 @@ export const useExercises = () => {
 
       exercises.value = data as Exercise[]
       return data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     } finally {
       isLoading.value = false
@@ -71,8 +71,8 @@ export const useExercises = () => {
       if (fetchError) throw fetchError
 
       return data as Exercise
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     } finally {
       isLoading.value = false
@@ -91,8 +91,8 @@ export const useExercises = () => {
 
       muscleGroups.value = data as MuscleGroup[]
       return data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     }
   }
@@ -109,8 +109,8 @@ export const useExercises = () => {
 
       equipment.value = data as Equipment[]
       return data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     }
   }

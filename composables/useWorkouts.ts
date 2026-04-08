@@ -47,8 +47,8 @@ export const useWorkouts = () => {
 
       workouts.value = data as Workout[]
       return data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     } finally {
       isLoading.value = false
@@ -77,8 +77,8 @@ export const useWorkouts = () => {
       if (fetchError) throw fetchError
 
       return data as Workout[]
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     } finally {
       isLoading.value = false
@@ -111,8 +111,8 @@ export const useWorkouts = () => {
       workoutExercises.value = exercises as WorkoutExercise[]
 
       return { workout, exercises }
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = (err as Error).message
       return null
     } finally {
       isLoading.value = false
@@ -152,9 +152,9 @@ export const useWorkouts = () => {
       }
 
       return { data: newWorkout, error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { data: null, error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { data: null, error: (err as Error).message }
     } finally {
       isLoading.value = false
     }
@@ -176,9 +176,9 @@ export const useWorkouts = () => {
       if (updateError) throw updateError
 
       return { data, error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { data: null, error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { data: null, error: (err as Error).message }
     } finally {
       isLoading.value = false
     }
@@ -200,9 +200,9 @@ export const useWorkouts = () => {
       workouts.value = workouts.value.filter((w) => w.id !== id)
 
       return { error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { error: (err as Error).message }
     } finally {
       isLoading.value = false
     }
@@ -227,9 +227,9 @@ export const useWorkouts = () => {
       if (sessionError) throw sessionError
 
       return { data, error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { data: null, error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { data: null, error: (err as Error).message }
     }
   }
 
@@ -250,9 +250,9 @@ export const useWorkouts = () => {
       if (completeError) throw completeError
 
       return { data, error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { data: null, error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { data: null, error: (err as Error).message }
     }
   }
 
@@ -268,9 +268,9 @@ export const useWorkouts = () => {
       if (logError) throw logError
 
       return { data, error: null }
-    } catch (err: any) {
-      error.value = err.message
-      return { data: null, error: err.message }
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return { data: null, error: (err as Error).message }
     }
   }
 

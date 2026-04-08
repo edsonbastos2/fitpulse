@@ -42,8 +42,8 @@
                   </div>
                   <button
                     v-if="closable"
-                    @click="close"
                     class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-dark-700 transition-colors"
+                    @click="close"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>

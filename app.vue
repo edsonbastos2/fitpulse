@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 // PWA Install prompt
-const deferredPrompt = ref<any>(null)
+const deferredPrompt = ref<Event | null>(null)
 
 onMounted(() => {
   window.addEventListener('beforeinstallprompt', (e) => {

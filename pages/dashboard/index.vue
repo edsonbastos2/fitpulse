@@ -223,7 +223,7 @@
               <div
                 class="progress-fill"
                 :style="{ width: `${Math.min((stats.weeklyWorkouts / weeklyGoal) * 100, 100)}%` }"
-              ></div>
+              />
             </div>
             <p class="text-sm text-slate-500">
               {{ weeklyGoal - stats.weeklyWorkouts > 0
@@ -273,10 +273,10 @@ definePageMeta({
   middleware: ['auth'],
 })
 
-const { user } = useSupabaseUser()
+const user = useSupabaseUser()
 
 const userName = computed(() => {
-  return user.value?.user_metadata?.name?.split(' ')[0] || 'Atleta'
+  return (user.value?.user_metadata?.name as string)?.split(' ')[0] || 'Atleta'
 })
 
 const greetingMessage = computed(() => {

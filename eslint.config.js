@@ -1,7 +1,14 @@
-module.exports = {
-  root: true,
-  extends: [
-    '@nuxt/eslint-config',
+import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+
+export default createConfigForNuxt({
+  ignores: [
+    'node_modules/**',
+    '.nuxt/**',
+    '.output/**',
+    'dist/**',
+    '.git/**',
+    'pnpm-lock.yaml',
+    'yarn.lock',
   ],
   rules: {
     // Vue specific rules
@@ -26,4 +33,4 @@ module.exports = {
     'prefer-const': 'error',
     'no-var': 'error',
   },
-}
+})
