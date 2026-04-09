@@ -24,12 +24,12 @@ Criar `UiRangeSlider` do zero usando Vue 3 + CSS puro (sem bibliotecas externas)
 
 ## Subtarefas
 
-- [ ] 7.1 Criar `components/ui/UiRangeSlider.vue` com slider single-handle usando `<input type="range">` nativo estilizado
-- [ ] 7.2 Implementar exibição do valor atual acima do handle (tooltip)
-- [ ] 7.3 Implementar modo dual-handle para range (dois inputs range sobrepostos com CSS)
-- [ ] 7.4 Aplicar estilos do design system: track dark-700, fill gradient-primary, handle primary-500 com glow
-- [ ] 7.5 Implementar keyboard nav: Arrow Left/Right decrementa/incrementa por step
-- [ ] 7.6 Adicionar label, error, hint wrappers consistentes com UiInput
+- [x] 7.1 Criar `components/ui/UiRangeSlider.vue` com slider single-handle usando `<input type="range">` nativo estilizado (overlay invisível sobre visual custom)
+- [x] 7.2 Exibição do valor atual em tooltip acima do handle (single e dual mode)
+- [x] 7.3 Modo dual-handle: dois inputs range sobrepostos, z-index dinâmico (handle arrastado fica por cima), handles não se cruzam (`start <= end`)
+- [x] 7.4 Estilos design system: track `dark-700`, fill `bg-gradient-primary`, handles `bg-gradient-primary` + `shadow-glow` + `border-primary-400`
+- [x] 7.5 Keyboard nav: Arrow Left/Right/Up/Down incrementa/decrementa por step (single mode); dual mode usa drag nativo do range input
+- [x] 7.6 Label, error (`role="alert"`), hint wrappers consistentes com UiInput; min/max labels opcionais
 
 ## Detalhes de Implementação
 
@@ -47,10 +47,10 @@ Consultar **techspec.md** → Seção "Decisões Principais" (UiRangeSlider puro
 
 ## Testes da Tarefa
 
-- [ ] **Unit — UiRangeSlider (single):** Valor padrão renderiza; mover slider emite update:modelValue; min/max/step respeitados; tooltip exibe valor atual; Arrow Right incrementa por step; Arrow Left decrementa; label/error/hint renderizam
-- [ ] **Unit — UiRangeSlider (dual):** Modo range com dois handles; emite array [start, end]; handles não se cruzam (start <= end); ambos navegáveis por teclado
-- [ ] **Estilização:** Verificar que track usa dark-700, fill usa gradient-primary, handle usa primary-500
-- [ ] **Acessibilidade:** Verificar aria-valuenow, aria-valuemin, aria-valuemax no input; focus-visible no handle
+- [x] **Unit — UiRangeSlider (single):** Valor padrão renderiza; mover slider emite `update:modelValue` com número; min/max/step respeitados; tooltip exibe valor formatado; Arrow Right/Left incrementa/decrementa por step; label/error/hint renderizam; error com `role="alert"`; `aria-valuemin/max/now` presentes
+- [x] **Unit — UiRangeSlider (dual):** Modo range com dois handles; emite `[start, end]`; handles não se cruzam (`start <= end` via `Math.min/Math.max`); z-index dinâmico no drag; tooltips separados para start e end
+- [x] **Estilização:** Track usa `bg-dark-700`; fill usa `bg-gradient-primary` com `left/width` dinâmicos; handles usam `bg-gradient-primary` + `shadow-glow` + `border-primary-400`; hover `scale-110`, active `scale-95`
+- [x] **Acessibilidade:** `aria-valuenow`, `aria-valuemin`, `aria-valuemax` no input; label/aria-label descritivo; `aria-describedby` conecta a erro/hint; focus ring via `focus-within:ring-2` no handle visual
 
 ## Arquivos relevantes
 

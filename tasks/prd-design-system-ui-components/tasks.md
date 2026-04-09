@@ -8,7 +8,7 @@
 - [x] 4.0 Auditoria de componentes existentes (UiButton, UiCard, UiInput)
 - [x] 5.0 Criar UiSelect e UiToggle
 - [x] 6.0 Criar UiDatePicker
-- [ ] 7.0 Criar UiRangeSlider
+- [x] 7.0 Criar UiRangeSlider
 - [ ] 8.0 Criar UiIconButton
 - [ ] 9.0 Criar cards especializados (ExerciseCard, WorkoutCard, StatCard)
 - [ ] 10.0 Criar UiChart
