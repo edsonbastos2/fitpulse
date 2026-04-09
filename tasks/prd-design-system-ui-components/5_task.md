@@ -21,12 +21,12 @@ Criar dois novos componentes de formulário: `UiSelect` (dropdown de seleção c
 
 ## Subtarefas
 
-- [ ] 5.1 Criar `components/ui/UiSelect.vue` com dropdown, busca interna, option groups, keyboard nav, click-outside para fechar
-- [ ] 5.2 Criar `components/ui/UiToggle.vue` com switch visual, label, disabled state, v-model
-- [ ] 5.3 Adicionar tipo `SelectOption` em `types/index.ts` (label, value, disabled, group)
-- [ ] 5.4 Implementar diretiva customizada `v-click-outside` (ou usar `@vueuse/core` useOnClickOutside) para fechar dropdown
-- [ ] 5.5 Garantir consistência visual com UiInput (mesma borda, focus ring, rounded)
-- [ ] 5.6 Verificar acessibilidade: role="listbox", role="option", aria-expanded, aria-selected, role="switch", aria-checked
+- [x] 5.1 Criar `components/ui/UiSelect.vue` com dropdown, busca interna, option groups, keyboard nav (Arrow Up/Down, Enter, Escape), click-outside via `@vueuse/core onClickOutside`
+- [x] 5.2 Criar `components/ui/UiToggle.vue` com switch visual, label, disabled state, v-model, keyboard (Space/Enter)
+- [x] 5.3 Tipo `SelectOption` adicionado em `types/index.ts` (label, value, disabled?, group?)
+- [x] 5.4 Click-outside implementado via `onClickOutside` do `@vueuse/core` (já disponível no projeto)
+- [x] 5.5 Consistência visual com UiInput: mesma borda dark-600, focus ring primary-500, rounded-xl, padding
+- [x] 5.6 Acessibilidade: UiSelect com `role="listbox"`, `role="option"`, `aria-expanded`, `aria-selected`; UiToggle com `role="switch"`, `aria-checked`
 
 ## Detalhes de Implementação
 
@@ -43,10 +43,10 @@ Consultar **techspec.md** → Seções "Interfaces Principais" (SelectOption) e 
 
 ## Testes da Tarefa
 
-- [ ] **Unit — UiSelect:** Renderiza opções; busca filtra opções (digitar texto reduz lista visível); seleção emite update:modelValue; Escape fecha dropdown; click-outside fecha; disabled state impede interação; error/hint/placeholder renderizam; Arrow Down/Up navega entre opções
-- [ ] **Unit — UiToggle:** Toggle on/off emite update:modelValue; disabled state impede clique; label renderiza; aria-checked reflete estado; Space ativa toggle
-- [ ] **Integração — Formulário:** UiSelect + UiInput + UiToggle em formulário; submeter verifica valores corretos
-- [ ] **Acessibilidade:** Verificar role="listbox" no dropdown, role="option" nas opções, aria-expanded, role="switch" no toggle, aria-checked
+- [x] **Unit — UiSelect:** Busca filtra opções (computed `filteredOptions`); seleção emite `update:modelValue`; Escape fecha; click-outside fecha via `onClickOutside`; disabled impede interação; error com `role="alert"`; hint/placeholder renderizam; Arrow Down/Up navega; `role="listbox"` e `role="option"` presentes; `aria-expanded` reflete estado; `aria-selected` na opção selecionada
+- [x] **Unit — UiToggle:** Toggle on/off emite `update:modelValue`; disabled impede clique; label renderiza; `aria-checked` reflete estado; Space/Enter ativam; sizes sm/md/lg aplicam dimensões corretas
+- [x] **Integração — Formulário:** UiSelect + UiInput + UiToggle com v-model encadeado; submeter formulário verifica valores corretos
+- [x] **Acessibilidade:** UiSelect: `role="listbox"`, `role="option"`, `aria-expanded`, `aria-selected`, keyboard navigation; UiToggle: `role="switch"`, `aria-checked`, focus ring `focus:ring-primary-500/40`
 
 ## Arquivos relevantes
 

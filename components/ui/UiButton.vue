@@ -78,7 +78,7 @@ const buttonClasses = computed(() => {
       classes.push(
         'bg-transparent text-slate-300 border border-dark-600',
         'hover:bg-dark-700 hover:border-dark-500 hover:text-white',
-        'focus:ring-dark-500'
+        'focus:ring-primary-500'
       )
       break
     case 'danger':

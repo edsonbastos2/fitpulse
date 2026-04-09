@@ -2,7 +2,7 @@
   <div :class="cardClasses" class="relative overflow-hidden">
     <!-- Gradient Border Effect (optional) -->
     <div
-      v-if="gradient"
+      v-if="variant === 'gradient'"
       class="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-transparent to-secondary-500/20 pointer-events-none"
     />
 

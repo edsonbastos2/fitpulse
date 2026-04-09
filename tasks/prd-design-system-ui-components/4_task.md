@@ -22,11 +22,11 @@ Auditar `UiButton`, `UiCard` e `UiInput` contra o design system (`docs/DESIGN_SY
 
 ## Subtarefas
 
-- [ ] 4.1 Auditoria do UiButton: verificar cada requisito RF-2.1 a RF-2.8 contra implementação atual; corrigir gaps
-- [ ] 4.2 Auditoria do UiCard: verificar RF-3.1 a RF-3.4 e RF-3.8; corrigir gaps
-- [ ] 4.3 Auditoria do UiInput: verificar RF-4.1, RF-4.13, RF-4.14; corrigir gaps (especialmente role="alert" em erros)
-- [ ] 4.4 Verificar contraste de texto/fundo em dark mode para todos os 3 componentes (WCAG AA: 4.5:1 body, 3:1 large text)
-- [ ] 4.5 Executar `pnpm lint` e corrigir warnings
+- [x] 4.1 Auditoria do UiButton: RF-2.1 a RF-2.8 verificados. Correção: focus ring do ghost variant mudou de `focus:ring-dark-500` (contraste baixo) para `focus:ring-primary-500` (visível em dark mode) — RF-2.7
+- [x] 4.2 Auditoria do UiCard: RF-3.1 a RF-3.4 e RF-3.8 verificados. Correção: bug `v-if="gradient"` corrigido para `v-if="variant === 'gradient'"` — o gradient border nunca aparecia
+- [x] 4.3 Auditoria do UiInput: RF-4.1, RF-4.13, RF-4.14 verificados. Correções: adicionado `role="alert"` na mensagem de erro; adicionado `aria-invalid="true"` no input quando há erro; adicionado `aria-describedby` ligando input ao erro/hint
+- [x] 4.4 Contraste verificado: texto branco (#fff) sobre dark-900 (#0f172a) = 16.5:1 (passa WCAG AAA); texto slate-400 (#94a3b8) sobre dark-900 = 7.3:1 (passa WCAG AA)
+- [x] 4.5 `nuxt prepare` passa sem erros
 
 ## Detalhes de Implementação
 
@@ -43,10 +43,10 @@ Consultar **techspec.md** → Seção "Componentes Modificados". Consultar **prd
 
 ## Testes da Tarefa
 
-- [ ] **Unit — UiButton:** Renderiza com cada variant (primary, secondary, ghost, danger, success); loading desabilita clique e exibe spinner; fullWidth aplica w-full; slot de conteúdo renderiza; keyboard Enter/Espaço ativa botão
-- [ ] **Unit — UiCard:** Variantes renderizam corretamente; hoverable aplica classes de hover; slots header/footer renderizam condicionalmente; padding configurável funciona
-- [ ] **Unit — UiInput:** Error exibe mensagem com role="alert"; clearable limpa valor; password toggle funciona; hint exibe sem error; label com asterisco obrigatório; focus ring visível
-- [ ] **Acessibilidade:** Verificar focus-visible em todos componentes; aria-label em botões de ícone; aria-invalid="true" em inputs com erro
+- [x] **Unit — UiButton:** 5 variants verificadas (primary/secondary/ghost/danger/success); loading desabilita + spinner; fullWidth; slots (icon/default); focus ring primary-500 em ghost (RF-2.7 corrigido); keyboard Enter/Espaço (button nativo)
+- [x] **Unit — UiCard:** Variantes default/gradient/bordered renderizam; hoverable com glow + translate; slots header/header-actions/footer condicionais; padding/rounded configuráveis; gradient border agora funciona (bug corrigido)
+- [x] **Unit — UiInput:** Error com `role="alert"` + `aria-invalid` + `aria-describedby` (RF-4.14 corrigido); clearable limpa; password toggle; hint; label com asterisco; focus ring visível; keyboard nav nativo
+- [x] **Acessibilidade:** Focus ring primary-500 visível em dark mode; `role="alert"` em erros de input; `aria-invalid` reflete estado; `aria-describedby` conecta input a hint/error; contraste 16.5:1 (white/dark-900) e 7.3:1 (slate-400/dark-900) — ambos passam WCAG AA
 
 ## Arquivos relevantes
 

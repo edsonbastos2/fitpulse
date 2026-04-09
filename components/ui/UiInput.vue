@@ -26,6 +26,8 @@
         :readonly="readonly"
         :required="required"
         :autocomplete="autocomplete"
+        :aria-invalid="!!error"
+        :aria-describedby="error ? `${id}-error` : hint ? `${id}-hint` : undefined"
         :class="inputClasses"
         class="w-full bg-dark-800/50 border border-dark-600 rounded-xl px-4 py-3 text-white placeholder:text-dark-400 transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
       >
@@ -60,12 +62,12 @@
     </div>
 
     <!-- Helper Text -->
-    <p v-if="hint && !error" class="mt-2 text-sm text-slate-500">
+    <p v-if="hint && !error" :id="`${id}-hint`" class="mt-2 text-sm text-slate-500">
       {{ hint }}
     </p>
 
     <!-- Error Message -->
-    <p v-if="error" class="mt-2 text-sm text-red-400">
+    <p v-if="error" :id="`${id}-error`" role="alert" class="mt-2 text-sm text-red-400">
       {{ error }}
     </p>
   </div>

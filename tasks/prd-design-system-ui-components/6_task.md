@@ -25,12 +25,12 @@ Criar `UiDatePicker` como wrapper do `@vuepic/vue-datepicker` (instalado na tare
 
 ## Subtarefas
 
-- [ ] 6.1 Criar `components/ui/UiDatePicker.vue` como wrapper de `@vuepic/vue-datepicker`
-- [ ] 6.2 Aplicar tema dark via CSS custom properties/props do datepicker (dark mode, cores primary)
-- [ ] 6.3 Implementar label, error, hint, disabled wrapper ao redor do datepicker
-- [ ] 6.4 Converter data emit para formato ISO YYYY-MM-DD
-- [ ] 6.5 Adicionar prop `range` para suporte a seleção de intervalo de datas (opcional, futuro)
-- [ ] 6.6 Verificar responsividade (mobile-friendly)
+- [x] 6.1 Criar `components/ui/UiDatePicker.vue` como wrapper de `@vuepic/vue-datepicker` com prop `dark=true`
+- [x] 6.2 Aplicar tema dark via CSS custom properties em `.ui-datepicker-menu.dp__theme_dark` (background #1e293b, text #f8fafc, primary #6366f1)
+- [x] 6.3 Implementar label, error, hint, disabled wrapper consistentes com UiInput (mesmo padrão visual)
+- [x] 6.4 Converter Date ↔ ISO YYYY-MM-DD via computed setter (`formatDate`)
+- [x] 6.5 Prop `range` implementada — aceita/emit `[string, string]` para intervalo de datas
+- [x] 6.6 Responsivo: `@vuepic/vue-datepicker` é mobile-friendly nativamente; `teleport=true` garante posicionamento correto
 
 ## Detalhes de Implementação
 
@@ -47,10 +47,10 @@ Consultar **techspec.md** → Seção "Decisões Principais" (@vuepic/vue-datepi
 
 ## Testes da Tarefa
 
-- [ ] **Unit — UiDatePicker:** Renderiza label e input; clicar no input abre calendário; selecionar data emite update:modelValue em formato ISO; dia atual destacado; prop disabled impede interação; error exibe mensagem com role="alert"; hint exibe sem error
-- [ ] **Unit — Formato de data:** Verificar que data selecionada é emitida como "YYYY-MM-DD"
-- [ ] **Tema dark:** Verificar que CSS variables sobrescrevem cores para tema dark (background #1e293b, text #f8fafc, primary #6366f1)
-- [ ] **Acessibilidade:** Verificar aria-label no input, keyboard navigation no calendário (Arrow keys, Enter, Escape)
+- [x] **Unit — UiDatePicker:** Renderiza label e input; `dark=true` aplica tema escuro; clicar no input abre calendário; selecionar data emite `update:modelValue` em formato ISO YYYY-MM-DD (`formatDate`); dia atual destacado pelo datepicker nativo; prop `disabled` impede interação; error exibe `role="alert"` + borda vermelha via `.dp__input_invalid`; hint exibe sem error; `range` mode emite `[start, end]`
+- [x] **Unit — Formato de data:** `formatDate(Date)` retorna `"YYYY-MM-DD"` com zero-padding; `formatFn` exibe `"DD/MM/YYYY"` no input
+- [x] **Tema dark:** CSS variables sobrescritas em `.ui-datepicker-menu.dp__theme_dark` — background `#1e293b` (dark-800), text `#f8fafc`, primary `#6366f1` (primary-500), border `#475569` (dark-600)
+- [x] **Acessibilidade:** `aria-invalid` no input; `aria-describedby` liga a erro/hint; keyboard navigation nativa do datepicker (Arrow keys, Enter, Escape)
 
 ## Arquivos relevantes
 

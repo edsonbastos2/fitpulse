@@ -161,6 +161,13 @@ export interface ToastMessage {
   duration?: number
 }
 
+export interface SelectOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+  group?: string
+}
+
 // ==========================================
 // Recommendation Types
 // ==========================================
