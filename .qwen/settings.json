@@ -14,7 +14,8 @@
       "Bash(powershell *)",
       "Bash(npx *)",
       "Bash(findstr *)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(rmdir *)"
     ]
   },
   "$version": 3

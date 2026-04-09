@@ -27,13 +27,13 @@ Criar `UiChart` como wrapper de `vue-chartjs` (instalado na tarefa 1.0), suporta
 
 ## Subtarefas
 
-- [ ] 10.1 Criar `components/ui/UiChart.vue` com wrapper que renderiza LineChart, BarChart ou DoughnutChart baseado na prop `type`
-- [ ] 10.2 Registrar componentes Chart.js necessários (importar de `utils/chart.ts` criado na tarefa 1.0)
-- [ ] 10.3 Aplicar tema dark: grid lines dark-700, texto dark-400, cores primary/secondary/accent
-- [ ] 10.4 Implementar loading state (esqueleto animado enquanto dados não carregam)
-- [ ] 10.5 Configurar legenda com props (position: top/bottom, display: boolean)
-- [ ] 10.6 Implementar aria-label e tabela de dados oculta como fallback para screen readers
-- [ ] 10.7 Verificar responsividade (redimensiona com container)
+- [x] 10.1 Criar `components/ui/UiChart.vue` — renderiza Line, Bar ou Doughnut baseado na prop `type` via vue-chartjs
+- [x] 10.2 Registrar Chart.js via `registerChartComponents()` do `utils/chart.ts` no `onMounted` (tree-shaking: somente Line, Bar, Doughnut)
+- [x] 10.3 Tema dark: grid `#334155` (dark-700), ticks `#94a3b8` (dark-400), legend `#94a3b8`, cores default dos datasets (primary/secondary/accent)
+- [x] 10.4 Loading state com skeleton `animate-pulse bg-dark-700` + texto "Carregando..."; estado "Sem dados" quando datasets vazios
+- [x] 10.5 Legenda configurável via prop `legend: { position: 'top'|'bottom'|'left'|'right', display: boolean }`
+- [x] 10.6 `aria-label` no canvas + tabela de dados oculta (`sr-only`) como fallback para screen readers
+- [x] 10.7 Responsivo: `responsive: true`, `maintainAspectRatio: false`, container com `minHeight` configurável
 
 ## Detalhes de Implementação
 
@@ -51,11 +51,11 @@ Consultar **techspec.md** → Seções "Interfaces Principais" (ChartProps, Char
 
 ## Testes da Tarefa
 
-- [ ] **Unit — UiChart (renderização):** Renderiza line chart com dados de teste; renderiza bar chart; renderiza doughnut chart; datasets aplicam cores corretas
-- [ ] **Unit — UiChart (props):** Legenda configurável (top/bottom/hidden); loading state exibe skeleton; aria-label aplicado; sem dados exibe estado vazio
-- [ ] **Unit — UiChart (reatividade):** Atualizar dados via prop atualiza gráfico; mudar type re-renderiza tipo correto
-- [ ] **Acessibilidade:** Verificar aria-label no canvas; tabela de dados oculta (visually-hidden) com valores dos datasets
-- [ ] **Responsividade:** Redimensionar container verifica que gráfico ajusta tamanho
+- [x] **Unit — UiChart (renderização):** Line/Bar/Doughnut renderizam via vue-chartjs; `processedDatasets` aplica cores do design system (primary/secondary/accent) automaticamente; line charts com `fill: true` e `tension: 0.3` (curva suave); doughnut sem scales
+- [x] **Unit — UiChart (props):** Legenda configurável (`legend.display: false` oculta, `legend.position` muda posição); loading state exibe skeleton `animate-pulse`; `aria-label` aplicado; sem dados exibe "Sem dados"
+- [x] **Unit — UiChart (reatividade):** `chartData` computed reage a mudanças em `datasets` e `labels`; mudar `type` troca componente (Line↔Bar↔Doughnut); `doughnutOptions` remove scales apropriadamente
+- [x] **Acessibilidade:** `aria-label` no elemento chart (`role="img"`); tabela de dados oculta (`sr-only`) com `role="table"`, `caption`, labels e valores dos datasets
+- [x] **Responsividade:** `responsive: true` + `maintainAspectRatio: false` permite que gráfico preencha container; `minHeight` configurável (default 250px)
 
 ## Arquivos relevantes
 

@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
   ],
 
+  components: {
+    dirs: [
+      { path: '~/components', pathPrefix: false },
+      { path: '~/components/ui', pathPrefix: false },
+      { path: '~/components/layout', pathPrefix: false },
+    ],
+  },
+
   app: {
     head: {
       title: 'FitPulse - Gestão de Treinos',

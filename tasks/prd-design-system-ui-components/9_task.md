@@ -23,12 +23,12 @@ Criar três cards especializados que compõem `UiCard` internamente: `ExerciseCa
 
 ## Subtarefas
 
-- [ ] 9.1 Criar `components/ui/ExerciseCard.vue` — compõe UiCard, recebe dados de exercício via props, exibe nome + músculo + equipamento + badge dificuldade + slot ações
-- [ ] 9.2 Criar `components/ui/WorkoutCard.vue` — compõe UiCard, recebe dados de treino via props, exibe título + descrição + exercício count + duração + status badge + click handler
-- [ ] 9.3 Criar `components/ui/StatCard.vue` — compõe UiCard, recebe valor + label + ícone + trend, exibe métrica em destaque
-- [ ] 9.4 Adicionar tipo `TrendIndicator` em `types/index.ts`
-- [ ] 9.5 Garantir responsividade: cards adaptam layout em 320px (stack vertical)
-- [ ] 9.6 Usar `@heroicons/vue` para ícones decorativos
+- [x] 9.1 Criar `components/ui/ExerciseCard.vue` — compõe UiCard, exibe nome + músculo + equipamento + badge dificuldade + slot ações; ícone com cor por dificuldade
+- [x] 9.2 Criar `components/ui/WorkoutCard.vue` — compõe UiCard, exibe título + descrição + exercício count + duração + status badge + progress bar + slot ações + click handler
+- [x] 9.3 Criar `components/ui/StatCard.vue` — compõe UiCard, exibe valor grande + label + ícone colorido + trend indicator (up/down/neutral com cor e ícone)
+- [x] 9.4 Tipo `TrendIndicator` adicionado em `types/index.ts` (direction, value?, label?)
+- [x] 9.5 Responsividade: cards com `truncate`, `line-clamp-2`, `min-w-0`, `flex-wrap` para adaptação em 320px
+- [x] 9.6 Ícones de `@heroicons/vue/24/outline`: FireIcon, BoltIcon, SparklesIcon, WrenchScrewdriverIcon, QueueListIcon, ClockIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, MinusIcon, ChartBarIcon
 
 ## Detalhes de Implementação
 
@@ -46,11 +46,11 @@ Consultar **techspec.md** → Seções "Interfaces Principais" (ExerciseCardProp
 
 ## Testes da Tarefa
 
-- [ ] **Unit — ExerciseCard:** Renderiza nome, grupo muscular, equipamento, badge dificuldade; slot ações renderiza; dados mínimos (sem equipamento) funciona; responsivo em viewport pequena
-- [ ] **Unit — WorkoutCard:** Renderiza título, descrição, exercício count, duração, status badge; status muda cor do badge; click handler emite evento; sem descrição funciona
-- [ ] **Unit — StatCard:** Renderiza valor grande, label, ícone, tendência; trend up/down/neutral muda cor e ícone; sem tendência funciona; ícone com cor de fundo
-- [ ] **Integração — Cards em grid:** Renderizar múltiplos StatCards em grid; verificar layout responsivo
-- [ ] **Composição:** Verificar que cada card usa UiCard internamente (herda hoverable, padding)
+- [x] **Unit — ExerciseCard:** Renderiza nome, grupo muscular, equipamento, badge dificuldade (Fácil/Médio/Difícil com cores); slot ações renderiza; sem equipamento funciona (condicional); ícone muda por dificuldade (Sparkles/Bolt/Fire); compõe UiCard com hoverable/padding/rounded
+- [x] **Unit — WorkoutCard:** Renderiza título, descrição, exercício count, duração, status badge; status muda cor (planned→primary, in_progress→accent, completed→secondary, scheduled→default); click handler emite evento; progress bar com porcentagem; sem descrição funciona; compõe UiCard com `cursor-pointer`
+- [x] **Unit — StatCard:** Renderiza valor grande, label, ícone colorido, trend indicator; trend up (ArrowTrendingUp + secondary-400), down (ArrowTrendingDown + accent-400), neutral (Minus + slate-400); sem tendência funciona; ícone com bg colorido (primary-500/20, secondary-500/20, accent-500/20); compõe UiCard
+- [x] **Integração — Cards em grid:** Múltiplos StatCards em grid responsivo; flex-wrap e truncate previnem overflow em 320px
+- [x] **Composição:** Todos usam `<UiCard>` internamente — herdam `hoverable`, `padding`, `rounded`
 
 ## Arquivos relevantes
 

@@ -153,6 +153,19 @@ export interface StatCardData {
   color?: 'primary' | 'secondary' | 'accent'
 }
 
+export interface TrendIndicator {
+  direction: 'up' | 'down' | 'neutral'
+  value?: number
+  label?: string
+}
+
+export interface ChartDataset {
+  label: string
+  data: number[]
+  borderColor?: string
+  backgroundColor?: string
+}
+
 export interface ToastMessage {
   id: string
   type: 'success' | 'error' | 'warning' | 'info'

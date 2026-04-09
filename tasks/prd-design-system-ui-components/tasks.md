@@ -9,8 +9,8 @@
 - [x] 5.0 Criar UiSelect e UiToggle
 - [x] 6.0 Criar UiDatePicker
 - [x] 7.0 Criar UiRangeSlider
-- [ ] 8.0 Criar UiIconButton
-- [ ] 9.0 Criar cards especializados (ExerciseCard, WorkoutCard, StatCard)
-- [ ] 10.0 Criar UiChart
-- [ ] 11.0 Adicionar tipos TypeScript compartilhados
-- [ ] 12.0 Integração final e verificação de acessibilidade
+- [x] 8.0 Criar UiIconButton
+- [x] 9.0 Criar cards especializados (ExerciseCard, WorkoutCard, StatCard)
+- [x] 10.0 Criar UiChart
+- [x] 11.0 Adicionar tipos TypeScript compartilhados
+- [x] 12.0 Integração final e verificação de acessibilidade

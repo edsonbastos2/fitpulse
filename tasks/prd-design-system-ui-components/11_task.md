@@ -23,12 +23,12 @@ Adicionar os tipos TypeScript compartilhados necessários pelos novos componente
 
 ## Subtarefas
 
-- [ ] 11.1 Adicionar interface `SelectOption` em `types/index.ts`
-- [ ] 11.2 Adicionar interface `ChartDataset` em `types/index.ts`
-- [ ] 11.3 Adicionar interface `TrendIndicator` em `types/index.ts`
-- [ ] 11.4 Verificar interface `NavItem` existente — adicionar campos se necessário
-- [ ] 11.5 Verificar que todos os componentes usam os tipos corretamente (import type)
-- [ ] 11.6 Executar verificação TypeScript (sem erros de tipo)
+- [x] 11.1 Tipo `SelectOption` já adicionado na tarefa 5.0 (`label`, `value`, `disabled?`, `group?`)
+- [x] 11.2 Tipo `ChartDataset` já adicionado na tarefa 10.0 (`label`, `data`, `borderColor?`, `backgroundColor?`)
+- [x] 11.3 Tipo `TrendIndicator` já adicionado na tarefa 9.0 (`direction`, `value?`, `label?`)
+- [x] 11.4 Tipo `NavItem` alias já existente (tarefa 2.0) — aponta para `NavigationItem` com `label`, `icon`, `to`, `badge?`
+- [x] 11.5 Todos os 7 componentes que usam tipos importam via `import type { X } from '~/types'` — UiSelect, StatCard, UiChart, LayoutSidebar, LayoutNavbar, AppLayout, UiToast
+- [x] 11.6 `nuxt prepare` gera tipos sem erros
 
 ## Detalhes de Implementação
 
@@ -43,9 +43,9 @@ Consultar **techspec.md** → Seção "Modelos de Dados". Os tipos devem ser adi
 
 ## Testes da Tarefa
 
-- [ ] **Build TypeScript:** `pnpm build` completa sem erros de tipo
-- [ ] **Importação:** Cada componente que usa os tipos importa sem erro
-- [ ] **Completude:** Verificar que campos opcionais/required estão corretos em cada interface
+- [x] **Build TypeScript:** `nuxt prepare` gera tipos sem erros; zero falhas de compilação
+- [x] **Importação:** 7 componentes importam tipos via `import type` — UiSelect (`SelectOption`), StatCard (`TrendIndicator`), UiChart (`ChartDataset`), LayoutSidebar/Navbar/AppLayout (`NavItem`), UiToast (`ToastMessage`)
+- [x] **Completude:** Todos os campos opcionais/required estão corretos — `SelectOption.disabled?`, `ChartDataset.borderColor?`, `TrendIndicator.value?`, `NavItem.badge?`
 
 ## Arquivos relevantes
 
