@@ -1,0 +1,1 @@
+import{E as u,C as a,G as s}from"./5CHW-G-n.js";const c=u(t=>{const e=a();if(["/dashboard","/workouts","/exercises","/profile","/settings","/schedule","/progress"].some(o=>t.path.startsWith(o))&&!e.value)return s("/auth/login");if(["/auth/login","/auth/register"].includes(t.path)&&e.value)return s("/dashboard")});export{c as default};

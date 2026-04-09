@@ -20,6 +20,7 @@
 
 [Defina interfaces de serviço principais (≤20 linhas por exemplo):
 
+**MUDAR PARA TYPESCRIPT**
 ```go
 // Exemplo de definição de interface
 type NomeServico interface {

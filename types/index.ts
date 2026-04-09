@@ -134,6 +134,9 @@ export interface ScheduledWorkout {
 // UI Types
 // ==========================================
 
+/** Alias de NavigationItem para consistência com a Tech Spec */
+export type NavItem = NavigationItem
+
 export interface NavigationItem {
   label: string
   icon: string
