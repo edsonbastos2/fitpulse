@@ -7,7 +7,7 @@
 - [x] [3.0 Composable `useRoles`](./3.0_composable-useRoles.md) ✅
 - [x] [4.0 Extensão do `useAuth`](./4.0_extensao-useAuth.md) ✅
 - [x] [5.0 Middleware `role-guard`](./5.0_middleware-role-guard.md) ✅
-- [ ] [6.0 Ajuste do `middleware/auth`](./6.0_ajuste-middleware-auth.md)
+- [x] [6.0 Ajuste do `middleware/auth`](./6.0_ajuste-middleware-auth.md) ✅
 - [ ] [7.0 Página `access-denied`](./7.0_pagina-access-denied.md)
 - [ ] [8.0 Componente `RoleSwitcher`](./8.0_componente-RoleSwitcher.md)
 - [ ] [9.0 Server Middleware de Validação de Roles](./9.0_server-middleware-role-validation.md)
