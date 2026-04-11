@@ -15,7 +15,8 @@
       "Bash(npx *)",
       "Bash(findstr *)",
       "Bash(true)",
-      "Bash(rmdir *)"
+      "Bash(rmdir *)",
+      "WebSearch"
     ]
   },
   "$version": 3
