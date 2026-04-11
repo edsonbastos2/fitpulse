@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6 animate-fade-in">
     <!-- Page Header -->
     <div>
       <h1 class="text-3xl font-display font-bold text-white">

@@ -14,5 +14,5 @@
 - [x] 10.0 Sincronização URL ↔ Estado
 - [x] 11.0 Componentes de detalhes (Header, Media, MuscleMap, Instructions, Meta, RelatedList)
 - [x] 12.0 Página /exercises/:id detalhes
-- [ ] 13.0 Animações e responsividade
+- [x] 13.0 Animações e responsividade
 - [ ] 14.0 Acessibilidade e estados de erro

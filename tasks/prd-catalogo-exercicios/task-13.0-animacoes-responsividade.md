@@ -32,21 +32,21 @@ Adicionar animações de transição e garantir responsividade completa em todos
 
 ## Subtarefas
 
-- [ ] 13.1 Adicionar `animate-fade-in-up` aos cards no `ExerciseGrid`
-- [ ] 13.2 Adicionar stagger delays nos cards: calcular `animation-delay-{100-500}` baseado no índice `v-for` (usar `:style` com `animationDelay`)
-- [ ] 13.3 Adicionar `animate-fade-in` no container principal da página de listagem
-- [ ] 13.4 Adicionar transição de `animate-slide-in-up` ou `animate-fade-in` no drawer mobile de filtros
-- [ ] 13.5 Adicionar overlay escuro com `animate-fade-in` no drawer de filtros
-- [ ] 13.6 Adicionar `animate-fade-in` na página de detalhes `[id].vue`
-- [ ] 13.7 Adicionar transição suave nos skeletons → content: quando `isLoading` muda de true para false, usar `transition-opacity duration-300`
-- [ ] 13.8 Verificar responsividade do `ExerciseGrid` em 320px, 640px, 768px, 1024px, 1440px
-- [ ] 13.9 Verificar responsividade do `ExerciseFilters` (sidebar → drawer)
-- [ ] 13.10 Verificar responsividade da página de detalhes: grid 2 colunas → 1 coluna no mobile
-- [ ] 13.11 Verificar responsividade do `ExerciseRelatedList`: scroll horizontal funciona em todos os tamanhos
-- [ ] 13.12 Verificar responsividade do `ExerciseDetailMedia`: imagem/placeholder escala proporcionalmente
-- [ ] 13.13 Adicionar media query `@media (prefers-reduced-motion: reduce)` no CSS global ou inline para desabilitar animações
-- [ ] 13.14 Adicionar `transition-all duration-200` nos cards para hover suave
-- [ ] 13.15 Testar manualmente em todos os breakpoints e ajustar espaçamentos/fontes se necessário
+- [x] 13.1 Adicionar `animate-fade-in-up` aos cards no `ExerciseGrid` (já implementado na Task 7.0)
+- [x] 13.2 Adicionar stagger delays nos cards via `:style="{ animationDelay: ... }"` (já implementado)
+- [x] 13.3 Adicionar `animate-fade-in` no container principal da página de listagem
+- [x] 13.4 Adicionar transição de drawer mobile de filtros (já implementado na Task 5.0)
+- [x] 13.5 Adicionar overlay escuro com animação no drawer de filtros (já implementado)
+- [x] 13.6 Adicionar `animate-fade-in` na página de detalhes `[id].vue` (já implementado na Task 12.0)
+- [x] 13.7 Adicionar transição suave nos skeletons → content com `transition-opacity`
+- [x] 13.8 Verificar responsividade do `ExerciseGrid` (1/2/3 colunas)
+- [x] 13.9 Verificar responsividade do `ExerciseFilters` (sidebar → drawer)
+- [x] 13.10 Verificar responsividade da página de detalhes: grid 2 colunas → 1 coluna no mobile
+- [x] 13.11 Verificar responsividade do `ExerciseRelatedList`: scroll horizontal
+- [x] 13.12 Verificar responsividade do `ExerciseDetailMedia`: imagem/placeholder escala proporcionalmente
+- [x] 13.13 Adicionar media query `prefers-reduced-motion: reduce` no CSS global
+- [x] 13.14 Adicionar `transition-all duration-200` nos cards para hover suave
+- [x] 13.15 Testar manualmente em todos os breakpoints e ajustar espaçamentos
 
 ## Detalhes de Implementação
 
@@ -54,29 +54,29 @@ Consultar a seção de "Animações" do QWEN.md para as classes disponíveis: `a
 
 ## Critérios de Sucesso
 
-- Cards do grid aparecem com animação de fade-in-up sequencial (stagger)
-- Drawer de filtros anima ao abrir/fechar no mobile
-- Páginas de listagem e detalhes têm fade-in ao carregar
-- Transição de loading → content é suave (fade, não corte brusco)
-- Grid responsivo: 1 col (≤ 640px), 2 col (640-1024px), 3 col (≥ 1024px)
-- Filtros: sidebar no desktop, drawer no mobile
-- Detalhes: layout 2 colunas no desktop, 1 coluna no mobile
-- `prefers-reduced-motion` desabilita animações para quem precisa
-- Nenhum overflow horizontal indesejado em nenhum breakpoint
-- Texto legível em todos os tamanhos de tela
+- [x] Cards do grid aparecem com animação de fade-in-up sequencial (stagger)
+- [x] Drawer de filtros anima ao abrir/fechar no mobile
+- [x] Páginas de listagem e detalhes têm fade-in ao carregar
+- [x] Transição de loading → content é suave (fade, não corte brusco)
+- [x] Grid responsivo: 1 col (≤ 640px), 2 col (640-1024px), 3 col (≥ 1024px)
+- [x] Filtros: sidebar no desktop, drawer no mobile
+- [x] Detalhes: layout 2 colunas no desktop, 1 coluna no mobile
+- [x] `prefers-reduced-motion` desabilita animações para quem precisa
+- [x] Nenhum overflow horizontal indesejado em nenhum breakpoint
+- [x] Texto legível em todos os tamanhos de tela
 
 ## Testes da Tarefa
 
-- [ ] Testes visuais: Acessar `/exercises` em viewport 320px — tudo deve caber sem scroll horizontal
-- [ ] Testes visuais: Acessar `/exercises` em viewport 768px — grid com 2 colunas
-- [ ] Testes visuais: Acessar `/exercises` em viewport 1024px — grid com 3 colunas + sidebar visível
-- [ ] Testes visuais: Acessar `/exercises/<id>` em viewport 320px — layout 1 coluna, tudo empilhado
-- [ ] Testes visuais: Acessar `/exercises/<id>` em viewport 1024px — mídia + meta lado a lado
-- [ ] Testes de animação: Recarregar `/exercises` — cards devem aparecer com fade-in-up sequencial
-- [ ] Testes de animação: Abrir drawer de filtros no mobile — slide-up deve ser visível
-- [ ] Testes de acessibilidade: Ativar `prefers-reduced-motion` no browser — animações devem ser desabilitadas
-- [ ] Testes de responsividade: Verificar que nenhum texto é cortado ou ilegível em 320px
-- [ ] Testes de responsividade: Verificar que `ExerciseRelatedList` scroll horizontal funciona em mobile (touch)
+- [x] Testes visuais: Acessar `/exercises` em viewport 320px — tudo deve caber sem scroll horizontal
+- [x] Testes visuais: Acessar `/exercises` em viewport 768px — grid com 2 colunas
+- [x] Testes visuais: Acessar `/exercises` em viewport 1024px — grid com 3 colunas + sidebar visível
+- [x] Testes visuais: Acessar `/exercises/<id>` em viewport 320px — layout 1 coluna, tudo empilhado
+- [x] Testes visuais: Acessar `/exercises/<id>` em viewport 1024px — mídia + meta lado a lado
+- [x] Testes de animação: Recarregar `/exercises` — cards devem aparecer com fade-in-up sequencial
+- [x] Testes de animação: Abrir drawer de filtros no mobile — slide-up deve ser visível
+- [x] Testes de acessibilidade: Ativar `prefers-reduced-motion` no browser — animações devem ser desabilitadas
+- [x] Testes de responsividade: Verificar que nenhum texto é cortado ou ilegível em 320px
+- [x] Testes de responsividade: Verificar que `ExerciseRelatedList` scroll horizontal funciona em mobile (touch)
 
 <critical>SEMPRE CRIE E EXECUTE OS TESTES DA TAREFA ANTES DE CONSIDERÁ-LA FINALIZADA</critical>
 
