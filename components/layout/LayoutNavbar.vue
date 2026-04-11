@@ -64,6 +64,11 @@
           <span v-if="item.badge" class="ml-auto badge badge-primary">{{ item.badge }}</span>
         </NuxtLink>
 
+        <!-- Role Switcher -->
+        <div class="py-2">
+          <RoleSwitcher />
+        </div>
+
         <!-- Custom slot for additional mobile nav items -->
         <slot name="mobile-actions" />
       </nav>

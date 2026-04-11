@@ -270,7 +270,8 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'authenticated',
-  middleware: ['auth'],
+  middleware: ['auth', 'role-guard'],
+  requiredRoles: ['user', 'personal_trainer', 'superadmin'],
 })
 
 const user = useSupabaseUser()

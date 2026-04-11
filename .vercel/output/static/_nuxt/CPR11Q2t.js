@@ -1,0 +1,1 @@
+import{a9 as a,a8 as u,aa as s}from"./BKkSZaFs.js";const c=a(t=>{const e=u();if(["/dashboard","/workouts","/exercises","/profile","/settings","/schedule","/progress"].some(o=>t.path.startsWith(o))&&!e.value)return s("/auth/login");if(["/auth/login","/auth/register"].includes(t.path)&&e.value)return s("/dashboard")});export{c as default};

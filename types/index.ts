@@ -305,3 +305,13 @@ declare module '#app' {
     requiredPermissions?: string[]
   }
 }
+
+// ==========================================
+// H3 Event Context Extension
+// ==========================================
+
+declare module 'h3' {
+  interface H3EventContext {
+    userRoles?: string[]
+  }
+}

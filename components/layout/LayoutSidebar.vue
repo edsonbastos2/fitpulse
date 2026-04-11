@@ -37,6 +37,9 @@
       </NuxtLink>
     </nav>
 
+    <!-- Role Switcher -->
+    <RoleSwitcher />
+
     <!-- User Section -->
     <div class="p-4 border-t border-dark-800">
       <div class="card p-4">

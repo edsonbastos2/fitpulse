@@ -1,6 +1,5 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import type { Role } from '~/utils/role-constants'
-import { ROLES } from '~/utils/role-constants'
 
 export default defineNuxtRouteMiddleware((to: RouteLocationNormalized) => {
   const { hasAnyRole, roles } = useRoles()

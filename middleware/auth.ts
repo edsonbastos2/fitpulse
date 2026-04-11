@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(async (to) => {
   const user = useSupabaseUser()
 
   // Protected routes that require authentication
@@ -16,5 +16,13 @@ export default defineNuxtRouteMiddleware((to) => {
 
   if (isAuthRoute && user.value) {
     return navigateTo('/dashboard')
+  }
+
+  // Load user roles when navigating to protected routes (only once per session)
+  if (isProtectedRoute && user.value) {
+    const { loadRoles, roles } = useRoles()
+    if (roles.value.length === 0) {
+      await loadRoles()
+    }
   }
 })
