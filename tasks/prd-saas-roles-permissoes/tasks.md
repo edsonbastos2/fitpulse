@@ -6,7 +6,7 @@
 - [x] [2.0 Migration do Schema de Roles](./2.0_migration-schema-roles.md) ✅
 - [x] [3.0 Composable `useRoles`](./3.0_composable-useRoles.md) ✅
 - [x] [4.0 Extensão do `useAuth`](./4.0_extensao-useAuth.md) ✅
-- [ ] [5.0 Middleware `role-guard`](./5.0_middleware-role-guard.md)
+- [x] [5.0 Middleware `role-guard`](./5.0_middleware-role-guard.md) ✅
 - [ ] [6.0 Ajuste do `middleware/auth`](./6.0_ajuste-middleware-auth.md)
 - [ ] [7.0 Página `access-denied`](./7.0_pagina-access-denied.md)
 - [ ] [8.0 Componente `RoleSwitcher`](./8.0_componente-RoleSwitcher.md)
