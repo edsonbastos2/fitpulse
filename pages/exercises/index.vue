@@ -72,7 +72,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ExerciseFilters, MuscleGroup, Equipment } from '~/types'
+import type { ExerciseFilters, MuscleGroup, Equipment, ExerciseQueryParams } from '~/types'
+import { useDebounceFn } from '@vueuse/core'
 
 definePageMeta({
   layout: 'authenticated',
@@ -83,6 +84,9 @@ definePageMeta({
 useHead({
   title: 'Catálogo de Exercícios | FitPulse',
 })
+
+const route = useRoute()
+const router = useRouter()
 
 const {
   exercises,
@@ -106,22 +110,10 @@ const isDrawerOpen = ref(false)
 const muscleGroupMap = ref<Record<string, string>>({})
 const equipmentMap = ref<Record<string, string>>({})
 
-// Debounced search
-let searchTimeout: ReturnType<typeof setTimeout> | null = null
-
-watch(searchTerm, (newValue) => {
-  if (searchTimeout) clearTimeout(searchTimeout)
-  searchTimeout = setTimeout(() => {
-    filters.value = { ...filters.value, search: newValue || undefined, page: 1 }
-    applyFilters()
-  }, 300)
-})
-
-// Watch sort value
-watch(sortValue, (newValue) => {
-  filters.value = { ...filters.value, sort: newValue as ExerciseFilters['sort'], page: 1 }
-  applyFilters()
-})
+// Valid values for validation
+const VALID_DIFFICULTIES = ['easy', 'medium', 'hard']
+const VALID_TYPES = ['compound', 'cardio', 'isolation']
+const VALID_SORTS = ['name_asc', 'name_desc', 'difficulty']
 
 const hasActiveFilters = computed(() => {
   return !!(
@@ -132,6 +124,90 @@ const hasActiveFilters = computed(() => {
     filters.value.type
   )
 })
+
+// Flag to prevent URL update loop when restoring from URL
+let isRestoringFromUrl = false
+
+/**
+ * Sync URL query params → filters state
+ */
+watch(
+  () => route.query,
+  (newQuery) => {
+    const q = newQuery as ExerciseQueryParams
+    const restoredFilters: ExerciseFilters = {}
+
+    // Search
+    if (q.search && typeof q.search === 'string' && q.search.trim()) {
+      restoredFilters.search = q.search.trim()
+      searchTerm.value = q.search.trim()
+    }
+
+    // Difficulty (validate)
+    if (q.difficulty && typeof q.difficulty === 'string' && VALID_DIFFICULTIES.includes(q.difficulty)) {
+      restoredFilters.difficulty = q.difficulty as ExerciseFilters['difficulty']
+    }
+
+    // Muscle group
+    if (q.muscleGroup && typeof q.muscleGroup === 'string' && q.muscleGroup.trim()) {
+      restoredFilters.muscleGroup = q.muscleGroup.trim()
+    }
+
+    // Equipment
+    if (q.equipment && typeof q.equipment === 'string' && q.equipment.trim()) {
+      restoredFilters.equipment = q.equipment.trim()
+    }
+
+    // Type (validate)
+    if (q.type && typeof q.type === 'string' && VALID_TYPES.includes(q.type)) {
+      restoredFilters.type = q.type as ExerciseFilters['type']
+    }
+
+    // Sort (validate)
+    if (q.sort && typeof q.sort === 'string' && VALID_SORTS.includes(q.sort)) {
+      restoredFilters.sort = q.sort as ExerciseFilters['sort']
+      sortValue.value = q.sort
+    }
+
+    // Page (convert to number, validate > 0)
+    if (q.page) {
+      const pageNum = parseInt(q.page as string, 10)
+      if (!isNaN(pageNum) && pageNum > 0) {
+        restoredFilters.page = pageNum
+      }
+    }
+
+    isRestoringFromUrl = true
+    filters.value = restoredFilters
+    isRestoringFromUrl = false
+
+    // Fetch data with restored filters
+    fetchExercisesPaginated(restoredFilters)
+  },
+  { deep: true, immediate: true }
+)
+
+/**
+ * Sync filters state → URL query params (debounced)
+ */
+const updateUrlFromFilters = useDebounceFn(() => {
+  if (isRestoringFromUrl) return
+
+  const f = filters.value
+  const query: Record<string, string> = {}
+
+  if (f.search) query.search = f.search
+  if (f.difficulty) query.difficulty = f.difficulty
+  if (f.muscleGroup) query.muscleGroup = f.muscleGroup
+  if (f.equipment) query.equipment = f.equipment
+  if (f.type) query.type = f.type
+  if (f.sort) query.sort = f.sort
+  if (f.page && f.page > 1) query.page = String(f.page)
+
+  router.replace({ query })
+}, 300)
+
+watch(filters, updateUrlFromFilters, { deep: true })
 
 const applyFilters = async () => {
   await fetchExercisesPaginated(filters.value)
@@ -154,9 +230,8 @@ const handleLoadMore = () => {
   applyFilters()
 }
 
-// Load initial data
+// Load initial data (muscle groups + equipment maps)
 onMounted(async () => {
-  // Fetch muscle groups and equipment for maps
   const [groups, equips] = await Promise.all([
     fetchMuscleGroups(),
     fetchEquipment(),
@@ -173,9 +248,6 @@ onMounted(async () => {
       equipmentMap.value[eq.id] = eq.name_pt
     })
   }
-
-  // Fetch initial exercises
-  await applyFilters()
 })
 
 // Handle error

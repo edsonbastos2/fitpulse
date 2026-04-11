@@ -11,7 +11,7 @@
 - [x] 7.0 Componente ExerciseGrid (grid responsivo 1/2/3 colunas)
 - [x] 8.0 Componentes feedback visual (Pagination, EmptyState, SkeletonGrid)
 - [x] 9.0 Página /exercises listagem
-- [ ] 10.0 Sincronização URL ↔ Estado
+- [x] 10.0 Sincronização URL ↔ Estado
 - [ ] 11.0 Componentes de detalhes (Header, Media, MuscleMap, Instructions, Meta, RelatedList)
 - [ ] 12.0 Página /exercises/:id detalhes
 - [ ] 13.0 Animações e responsividade
