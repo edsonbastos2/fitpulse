@@ -296,6 +296,22 @@ export interface PaginatedResponse<T> {
 }
 
 // ==========================================
+// Catálogo de Exercícios — Filtros e Query
+// ==========================================
+
+export interface ExerciseFilters {
+  search?: string
+  difficulty?: Exercise['difficulty']
+  muscleGroup?: string // muscle_group ID
+  equipment?: string // equipment ID
+  type?: 'compound' | 'cardio' | 'isolation'
+  sort?: 'name_asc' | 'name_desc' | 'difficulty'
+  page?: number
+}
+
+export type ExerciseQueryParams = Partial<Record<keyof ExerciseFilters, string>>
+
+// ==========================================
 // Nuxt Route Meta Extension
 // ==========================================
 
