@@ -11,6 +11,36 @@ export interface User {
   updated_at: string
 }
 
+export interface Role {
+  id: string
+  slug: 'superadmin' | 'user' | 'personal_trainer'
+  name: string
+  description: string
+  created_at: string
+}
+
+export interface UserRole {
+  id: string
+  user_id: string
+  role_id: string
+  granted_at: string
+  granted_by: string | null
+}
+
+export interface RolePermission {
+  id: string
+  role_id: string
+  permission: string
+}
+
+export interface TrainerStudent {
+  id: string
+  trainer_id: string
+  student_id: string
+  created_at: string
+  created_by: string | null
+}
+
 export interface UserProfile {
   id: string
   user_id: string
@@ -28,6 +58,8 @@ export interface UserProfile {
     age?: number
     gender?: 'male' | 'female' | 'other'
   }
+  roles?: Role[]
+  active_role?: 'superadmin' | 'user' | 'personal_trainer'
   created_at: string
   updated_at: string
 }
@@ -261,4 +293,15 @@ export interface PaginatedResponse<T> {
   page: number
   per_page: number
   total_pages: number
+}
+
+// ==========================================
+// Nuxt Route Meta Extension
+// ==========================================
+
+declare module '#app' {
+  interface PageMeta {
+    requiredRoles?: ('superadmin' | 'user' | 'personal_trainer')[]
+    requiredPermissions?: string[]
+  }
 }

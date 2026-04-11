@@ -16,7 +16,9 @@
       "Bash(findstr *)",
       "Bash(true)",
       "Bash(rmdir *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(curl *)",
+      "Bash(npm install *)"
     ]
   },
   "$version": 3
