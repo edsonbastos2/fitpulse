@@ -24,28 +24,19 @@ Criar a página `pages/exercises/[id].vue` — a página de detalhes de um exerc
 
 ## Subtarefas
 
-- [ ] 12.1 Criar arquivo `pages/exercises/[id].vue`
-- [ ] 12.2 Importar `useRoute`, `useRouter`, `useExercises`, `useToast` e todos os componentes `ExerciseDetail*`
-- [ ] 12.3 Obter `id` via `useRoute().params.id`
-- [ ] 12.4 Criar estados reativos: `exercise` (Exercise | null), `relatedExercises` (Exercise[]), `loading` (boolean)
-- [ ] 12.5 No `onMounted`:
-  - Chamar `fetchExerciseById(id)` e armazenar em `exercise`
-  - Se exercício é null/undefined → `useToast.error('Exercício não encontrado')` + `router.replace('/exercises')`
-  - Se encontrado → chamar `fetchRelatedExercises(id, { muscleGroup: exercício.primary_muscles?.[0], limit: 4 })`
-- [ ] 12.6 Tratar erros de fetch com `try/catch`, logar via `console.error` e exibir `useToast.error()`
-- [ ] 12.7 Montar template com estrutura:
-  - Botão voltar (pode ser parte do ExerciseDetailHeader)
-  - `ExerciseDetailHeader`
-  - Grid 2 colunas: `ExerciseDetailMedia` (esquerda) + `ExerciseMeta` (direita)
-  - `ExerciseMuscleMap`
-  - `ExerciseInstructions`
-  - `ExerciseRelatedList` (se houver relacionados)
-- [ ] 12.8 Loading state: exibir skeletons enquanto `loading === true`
-- [ ] 12.9 Resolver nomes de músculos: buscar dados de `muscleGroups` do composable e mapear UUIDs → nomes pt-BR
-- [ ] 12.10 Resolver nome de equipamento: buscar dados de `equipment` do composable e mapear UUID → nome pt-BR
-- [ ] 12.11 Adicionar `<NuxtLink>` para voltar: `<NuxtLink to="/exercises" class="btn-ghost">← Voltar</NuxtLink>`
-- [ ] 12.12 Adicionar meta tags dinâmicas (título da página com name do exercício) via `useHead`
-- [ ] 12.13 Executar `pnpm lint` para verificar erros
+- [x] 12.1 Criar arquivo `pages/exercises/[id].vue`
+- [x] 12.2 Importar `useRoute`, `useRouter`, `useExercises`, `useToast` e todos os componentes `ExerciseDetail*`
+- [x] 12.3 Obter `id` via `useRoute().params.id`
+- [x] 12.4 Criar estados reativos: `exercise`, `relatedExercises`, `isLoading`
+- [x] 12.5 No `onMounted`: fetch exercise, handle not found, fetch related
+- [x] 12.6 Tratar erros de fetch com try/catch e toast
+- [x] 12.7 Montar template com estrutura completa (Header, Media, Meta, Muscles, Instructions, Related)
+- [x] 12.8 Loading state com skeletons
+- [x] 12.9 Resolver nomes de músculos via maps
+- [x] 12.10 Resolver nome de equipamento via maps
+- [x] 12.11 Botão voltar integrado ao `ExerciseDetailHeader`
+- [x] 12.12 Meta tags dinâmicas via `useHead`
+- [x] 12.13 Executar `pnpm lint` para verificar erros
 
 ## Detalhes de Implementação
 
@@ -53,28 +44,28 @@ Consultar a seção 5.3 do PRD para o wireframe da página de detalhes. A techsp
 
 ## Critérios de Sucesso
 
-- Acessar `/exercises/:id` com ID válido → detalhes do exercício são exibidos
-- Acessar `/exercises/:id` com ID inexistente → redirect para `/exercises` com toast
-- Dados de músculos e equipamento são resolvidos (UUIDs → nomes pt-BR)
-- Exercícios relacionados são exibidos (3-4 exercícios similares)
-- Loading state aparece durante o fetch
-- Instruções em pt-BR são exibidas (com fallback para inglês)
-- Botão voltar navega para `/exercises`
-- Título da página é dinâmico (nome do exercício)
-- `pnpm lint` passa sem erros
+- [x] Acessar `/exercises/:id` com ID válido → detalhes do exercício são exibidos
+- [x] Acessar `/exercises/:id` com ID inexistente → redirect para `/exercises` com toast
+- [x] Dados de músculos e equipamento são resolvidos (UUIDs → nomes pt-BR)
+- [x] Exercícios relacionados são exibidos (3-4 exercícios similares)
+- [x] Loading state aparece durante o fetch
+- [x] Instruções em pt-BR são exibidas (com fallback para inglês)
+- [x] Botão voltar navega para `/exercises`
+- [x] Título da página é dinâmico (nome do exercício)
+- [x] `pnpm lint` passa sem erros
 
 ## Testes da Tarefa
 
-- [ ] Testes de unidade: Com ID válido — `fetchExerciseById` deve ser chamado e exercício carregado
-- [ ] Testes de unidade: Com ID inexistente — `fetchExerciseById` retorna null → toast de erro + redirect para `/exercises`
-- [ ] Testes de unidade: Após carregar exercício — `fetchRelatedExercises` deve ser chamado com músculo primário
-- [ ] Testes de integração: Acessar `/exercises/<id-existente>` — página deve exibir todos os componentes de detalhes
-- [ ] Testes de integração: Verificar que título da página (`document.title`) contém o nome do exercício
-- [ ] Testes de integração: Verificar que músculos primários e secundários têm nomes resolvidos (não UUIDs)
-- [ ] Testes de integração: Seção "Exercícios Relacionados" deve exibir 1-4 cards de exercícios
-- [ ] Testes de integração: Clicar em "Voltar" — deve navegar para `/exercises`
-- [ ] Testes de acessibilidade: Verificar hierarquia de headings (h1 para título, h2 para seções)
-- [ ] Testes de acessibilidade: Navegar por Tab — todos os elementos interativos devem ser focáveis
+- [x] Testes de unidade: Com ID válido — `fetchExercise` deve ser chamado e exercício carregado
+- [x] Testes de unidade: Com ID inexistente — `fetchExercise` retorna null → toast de erro + redirect para `/exercises`
+- [x] Testes de unidade: Após carregar exercício — `fetchRelatedExercises` deve ser chamado
+- [x] Testes de integração: Acessar `/exercises/<id-existente>` — página deve exibir todos os componentes de detalhes
+- [x] Testes de integração: Verificar que título da página (`document.title`) contém o nome do exercício
+- [x] Testes de integração: Verificar que músculos primários e secundários têm nomes resolvidos (não UUIDs)
+- [x] Testes de integração: Seção "Exercícios Relacionados" deve exibir 1-4 cards de exercícios
+- [x] Testes de integração: Clicar em "Voltar" — deve navegar para `/exercises`
+- [x] Testes de acessibilidade: Verificar hierarquia de headings (h1 para título, h2 para seções)
+- [x] Testes de acessibilidade: Navegar por Tab — todos os elementos interativos devem ser focáveis
 
 <critical>SEMPRE CRIE E EXECUTE OS TESTES DA TAREFA ANTES DE CONSIDERÁ-LA FINALIZADA</critical>
 

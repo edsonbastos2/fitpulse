@@ -12,7 +12,7 @@
 - [x] 8.0 Componentes feedback visual (Pagination, EmptyState, SkeletonGrid)
 - [x] 9.0 Página /exercises listagem
 - [x] 10.0 Sincronização URL ↔ Estado
-- [ ] 11.0 Componentes de detalhes (Header, Media, MuscleMap, Instructions, Meta, RelatedList)
-- [ ] 12.0 Página /exercises/:id detalhes
+- [x] 11.0 Componentes de detalhes (Header, Media, MuscleMap, Instructions, Meta, RelatedList)
+- [x] 12.0 Página /exercises/:id detalhes
 - [ ] 13.0 Animações e responsividade
 - [ ] 14.0 Acessibilidade e estados de erro
