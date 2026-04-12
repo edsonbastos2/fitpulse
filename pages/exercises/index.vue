@@ -1,44 +1,77 @@
 <template>
-  <div class="space-y-6 animate-fade-in">
+  <div class="space-y-4 lg:space-y-6 animate-fade-in">
     <!-- Page Header -->
     <div>
-      <h1 class="text-3xl font-display font-bold text-white">
+      <h1 class="text-2xl lg:text-3xl font-display font-bold text-white">
         Catálogo de Exercícios
       </h1>
-      <p class="text-slate-400 mt-1">
+      <p class="text-sm lg:text-base text-slate-400 mt-1">
         Explore nossa biblioteca completa de exercícios com instruções detalhadas
       </p>
     </div>
 
-    <div class="flex gap-6">
-      <!-- Desktop Sidebar Filters -->
+    <div class="flex gap-4 lg:gap-6">
+      <!-- Desktop Sidebar Filters (hidden on mobile) -->
       <ExerciseFilters
         :filters="filters"
-        :mobile-open="isDrawerOpen"
         @update:filters="handleFilterChange"
-        @update:mobile-open="isDrawerOpen = $event"
         @clear="handleClearFilters"
       />
 
       <!-- Main Content -->
       <main class="flex-1 min-w-0">
-        <!-- Controls Bar -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-          <div class="flex-1 w-full">
-            <ExerciseSearchBar
-              v-model="searchTerm"
-              placeholder="Buscar exercício..."
-            />
-          </div>
+        <!-- Search Bar (full width) -->
+        <div class="mb-3">
+          <ExerciseSearchBar
+            v-model="searchTerm"
+            placeholder="Buscar exercício..."
+          />
+        </div>
+
+        <!-- Sort Select - Mobile: full width row below search | Desktop: inline with chips -->
+        <div class="mb-3 lg:hidden">
           <ExerciseSortSelect
             v-model="sortValue"
+            full-width
           />
+        </div>
+
+        <!-- Filter Chips (mobile/tablet) + Sort (desktop only) -->
+        <div class="flex items-center gap-3 mb-4 lg:mb-6 min-w-0">
+          <!-- Filter Chips - Mobile/Tablet (hidden on desktop) -->
+          <div class="min-w-0 flex-1">
+            <ExerciseFilterChips
+              :filters="filters"
+              :mobile-open="isDrawerOpen"
+              :muscle-group-map="muscleGroupMap"
+              :equipment-map="equipmentMap"
+              @update:filters="handleFilterChange"
+              @update:mobile-open="isDrawerOpen = $event"
+              @clear="handleClearFilters"
+            />
+          </div>
+
+          <!-- Sort Select - Desktop only (hidden on mobile) -->
+          <div class="hidden lg:block lg:ml-auto flex-shrink-0">
+            <ExerciseSortSelect
+              v-model="sortValue"
+            />
+          </div>
         </div>
 
         <!-- Loading State -->
         <ExerciseSkeletonGrid
           v-if="isLoading && exercises.length === 0"
-          :count="9"
+          :count="8"
+        />
+
+        <!-- Error State -->
+        <ExerciseEmptyState
+          v-else-if="fetchError && exercises.length === 0"
+          :error="fetchError"
+          :show-clear-button="hasActiveFilters"
+          @clear-filters="handleClearFilters"
+          @retry="applyFilters"
         />
 
         <!-- Empty State -->
@@ -56,6 +89,7 @@
           :exercises="exercises"
           :muscle-group-map="muscleGroupMap"
           :equipment-map="equipmentMap"
+          :loading="isLoading"
         />
 
         <!-- Pagination -->
@@ -100,11 +134,14 @@ const {
   fetchEquipment,
 } = useExercises()
 
+const toast = useToast()
+
 // Filter state
 const filters = ref<ExerciseFilters>({})
 const searchTerm = ref('')
 const sortValue = ref('name_asc')
 const isDrawerOpen = ref(false)
+const fetchError = ref<{ title: string; message: string } | null>(null)
 
 // Maps for resolving UUIDs to names
 const muscleGroupMap = ref<Record<string, string>>({})
@@ -210,7 +247,14 @@ const updateUrlFromFilters = useDebounceFn(() => {
 watch(filters, updateUrlFromFilters, { deep: true })
 
 const applyFilters = async () => {
-  await fetchExercisesPaginated(filters.value)
+  fetchError.value = null
+  const result = await fetchExercisesPaginated(filters.value)
+
+  // Check if there was an error
+  if (result?.error) {
+    fetchError.value = result.error
+    toast.error(result.error.title, result.error.message)
+  }
 }
 
 const handleFilterChange = (updatedFilters: ExerciseFilters) => {

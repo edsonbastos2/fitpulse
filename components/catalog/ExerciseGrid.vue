@@ -1,9 +1,11 @@
 <template>
   <div
     v-if="exercises.length > 0"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6"
+    class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-4"
     role="list"
     aria-label="Lista de exercícios"
+    aria-live="polite"
+    :aria-busy="loading"
   >
     <div
       v-for="(exercise, index) in exercises"
@@ -12,7 +14,7 @@
       :style="{ animationDelay: `${Math.min(index * 100, 500)}ms` }"
       role="listitem"
     >
-      <ExerciseCard
+      <ExerciseCardCompact
         :exercise="exercise"
         :muscle-group-names="resolveMuscleNames(exercise)"
         :equipment-name="resolveEquipmentName(exercise)"
@@ -28,12 +30,14 @@ interface Props {
   exercises?: Exercise[]
   muscleGroupMap?: Record<string, string>
   equipmentMap?: Record<string, string>
+  loading?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   exercises: () => [],
   muscleGroupMap: () => ({}),
   equipmentMap: () => ({}),
+  loading: false,
 })
 
 const resolveMuscleNames = (exercise: Exercise): string[] => {

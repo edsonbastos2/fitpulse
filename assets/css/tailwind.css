@@ -20,6 +20,26 @@
     min-height: 100vh;
   }
 
+  /* Global focus-visible styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-dark-900;
+  }
+
+  /* Remove default outline for mouse users, keep for keyboard */
+  *:focus {
+    outline: none;
+  }
+
+  /* Ensure interactive elements have visible focus */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-dark-900;
+  }
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     @apply w-2;

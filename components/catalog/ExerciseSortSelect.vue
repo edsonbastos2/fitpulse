@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-2">
+  <div :class="containerClasses">
     <label :for="selectId" class="text-sm text-slate-400 whitespace-nowrap">
       <ArrowsUpDownIcon class="w-4 h-4 inline-block mr-1 -mt-0.5" aria-hidden="true" />
       Ordenar por
@@ -8,7 +8,7 @@
     <select
       :id="selectId"
       :value="modelValue"
-      class="input w-auto min-w-[160px]"
+      :class="selectClasses"
       aria-label="Ordenar exercícios por"
       @change="handleChange"
     >
@@ -24,10 +24,13 @@ import { ArrowsUpDownIcon } from '@heroicons/vue/24/outline'
 
 interface Props {
   modelValue?: string
+  /** When true, takes full width (mobile mode) */
+  fullWidth?: boolean
 }
 
-const _props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   modelValue: 'name_asc',
+  fullWidth: false,
 })
 
 const emit = defineEmits<{
@@ -46,4 +49,16 @@ const handleChange = (event: Event) => {
   const target = event.target as HTMLSelectElement
   emit('update:modelValue', target.value)
 }
+
+const containerClasses = computed(() =>
+  props.fullWidth
+    ? 'flex flex-col gap-2 w-full'
+    : 'flex items-center gap-2'
+)
+
+const selectClasses = computed(() =>
+  props.fullWidth
+    ? 'input w-full'
+    : 'input w-auto min-w-[160px]'
+)
 </script>

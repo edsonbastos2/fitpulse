@@ -2,6 +2,8 @@
   <NuxtLink
     :to="`/exercises/${effectiveExercise.id}`"
     class="block exercise-card-link"
+    tabindex="0"
+    :aria-label="`Ver detalhes de ${effectiveExercise.name_pt}`"
   >
     <UiCard
       :hoverable="hoverable"
@@ -164,5 +166,9 @@ const difficultyColor = computed(() => {
 
 .exercise-card-link:hover {
   text-decoration: none;
+}
+
+.exercise-card-link:focus-visible {
+  @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-dark-900 rounded-2xl;
 }
 </style>

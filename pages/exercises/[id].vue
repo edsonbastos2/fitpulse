@@ -140,7 +140,10 @@ onMounted(async () => {
     })
   } catch (err) {
     console.error('[exercise-details] Error loading exercise:', err)
-    toast.error('Erro ao carregar exercício')
+
+    const { title, message } = getFetchErrorMessage(err)
+    toast.error(title, message)
+
     router.replace('/exercises')
   } finally {
     isLoading.value = false

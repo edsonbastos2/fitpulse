@@ -1,4 +1,5 @@
 import type { Exercise, MuscleGroup, Equipment, ExerciseFilters } from '~/types'
+import { isNetworkError, getFetchErrorMessage } from '~/utils/error-helpers'
 
 export const useExercises = () => {
   const supabase = useSupabaseClient()
@@ -67,7 +68,8 @@ export const useExercises = () => {
       } else if (type === 'cardio') {
         query = query.eq('is_cardio', true)
       } else if (type === 'isolation') {
-        query = query.and('is_compound.eq.false,is_cardio.eq.false')
+        // Isolation = NOT compound AND NOT cardio
+        query = query.eq('is_compound', false).eq('is_cardio', false)
       }
 
       // Apply sorting
@@ -101,7 +103,7 @@ export const useExercises = () => {
       error.value = message
       exercises.value = []
       totalExercises.value = 0
-      return null
+      return { error: getFetchErrorMessage(err) }
     } finally {
       isLoading.value = false
     }

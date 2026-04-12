@@ -1,5 +1,10 @@
 <template>
-  <span :class="badgeClasses" class="inline-flex items-center gap-1.5 font-medium rounded-full">
+  <span
+    :class="badgeClasses"
+    class="inline-flex items-center gap-1.5 font-medium rounded-full"
+    :role="role"
+    :aria-label="ariaLabel"
+  >
     <slot name="icon" />
     <slot />
   </span>
@@ -11,6 +16,10 @@ interface Props {
   size?: 'sm' | 'md' | 'lg'
   pill?: boolean
   outline?: boolean
+  /** Semantic role: 'status' for informative, 'img' for icon-like, null for generic */
+  role?: string | null
+  /** Accessible label for screen readers */
+  ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,6 +27,8 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'sm',
   pill: false,
   outline: false,
+  role: null,
+  ariaLabel: undefined,
 })
 
 const badgeClasses = computed(() => {

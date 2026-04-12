@@ -18,7 +18,12 @@
       "Bash(rmdir *)",
       "WebSearch",
       "Bash(curl *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(cmd *)",
+      "Bash(start *)",
+      "Bash(netstat *)",
+      "Bash(tasklist *)",
+      "Bash(dir *)"
     ]
   },
   "$version": 3

@@ -2,8 +2,8 @@
   <div class="space-y-4">
     <!-- Difficulty Section -->
     <section class="card-gradient rounded-xl p-4">
-      <h3 class="text-sm font-semibold text-white mb-3">Dificuldade</h3>
-      <div class="space-y-2">
+      <h3 id="difficulty-label" class="text-sm font-semibold text-white mb-3">Dificuldade</h3>
+      <div class="space-y-2" role="radiogroup" aria-labelledby="difficulty-label">
         <label
           v-for="option in difficultyOptions"
           :key="option.value"
@@ -79,8 +79,8 @@
 
     <!-- Type Section -->
     <section class="card-gradient rounded-xl p-4">
-      <h3 class="text-sm font-semibold text-white mb-3">Tipo</h3>
-      <div class="space-y-2">
+      <h3 id="type-label" class="text-sm font-semibold text-white mb-3">Tipo</h3>
+      <div class="space-y-2" role="radiogroup" aria-labelledby="type-label">
         <label
           v-for="option in typeOptions"
           :key="option.value"
