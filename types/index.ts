@@ -52,6 +52,7 @@ export interface UserProfile {
   preferred_duration: number // minutes
   equipment_available: string[]
   injuries?: string[]
+  has_completed_first_workout?: boolean
   body_stats?: {
     weight?: number
     height?: number
@@ -149,6 +150,53 @@ export interface WorkoutLog {
   completed: boolean
   notes?: string
   logged_at: string
+}
+
+// ==========================================
+// Session Store Types (Pinia)
+// ==========================================
+
+/** Input para log de set (sem logged_at, gerado automaticamente) */
+export interface SetLogInput {
+  session_id: string
+  workout_exercise_id: string
+  set_number: number
+  weight?: number
+  reps?: number
+  duration?: number
+  rpe?: number
+  completed: boolean
+  notes?: string
+}
+
+/** Estado de um exercício durante a sessão ativa */
+export interface ExerciseSessionState {
+  workout_exercise_id: string
+  exercise_id: string
+  exercise_name: string
+  sets: number
+  reps?: number
+  duration?: number
+  rest_period: number
+  logs: SetLogInput[]
+}
+
+/** Estado do timer de descanso */
+export interface TimerState {
+  remaining: number // segundos restantes
+  isRunning: boolean
+  totalDuration: number // duração total do descanso em segundos
+  startedAt?: string // ISO timestamp
+}
+
+/** Dados do checkpoint salvo no localStorage */
+export interface SessionCheckpoint {
+  sessionId: string
+  workoutId: string
+  exercises: ExerciseSessionState[]
+  activeExerciseIndex: number
+  startedAt: string
+  savedAt: string
 }
 
 export interface ScheduledWorkout {

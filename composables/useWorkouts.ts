@@ -274,6 +274,74 @@ export const useWorkouts = () => {
     }
   }
 
+  // Fetch recent completed sessions with logs for insights
+  const fetchRecentSessions = async (limit: number = 10) => {
+    if (!user.value) return null
+
+    try {
+      const { data: sessionsData, error: sessionsError } = await supabase
+        .from('workout_sessions')
+        .select('*')
+        .eq('user_id', user.value.id)
+        .eq('status', 'completed')
+        .order('started_at', { ascending: false })
+        .limit(limit)
+
+      if (sessionsError) throw sessionsError
+
+      if (!sessionsData || sessionsData.length === 0) return []
+
+      // Fetch logs for all sessions
+      const sessionIds = sessionsData.map((s) => s.id)
+      const { data: logsData, error: logsError } = await supabase
+        .from('workout_logs')
+        .select('*, exercises(*)')
+        .in('session_id', sessionIds)
+
+      if (logsError) throw logsError
+
+      // Build sessions with their logs
+      const sessionsWithLogs = sessionsData.map((session) => {
+        const sessionLogs = (logsData || [])
+          .filter((log) => log.session_id === session.id)
+          .map((log) => ({
+            exercise_id: log.exercise_id || '',
+            exercise_name: (log.exercises as any)?.name_pt || (log.exercises as any)?.name || 'Exercício',
+            set_number: log.set_number || 0,
+            weight: log.weight,
+            reps: log.reps,
+            volume: log.weight && log.reps ? log.weight * log.reps : 0,
+          }))
+
+        const totalVolume = sessionLogs.reduce((sum, log) => sum + (log.volume || 0), 0)
+
+        // Calculate duration if completed_at exists
+        let durationMinutes: number | undefined
+        if (session.started_at && session.completed_at) {
+          const start = new Date(session.started_at).getTime()
+          const end = new Date(session.completed_at).getTime()
+          durationMinutes = Math.round((end - start) / (1000 * 60))
+        }
+
+        return {
+          id: session.id,
+          workout_id: session.workout_id,
+          started_at: session.started_at,
+          completed_at: session.completed_at,
+          status: session.status as 'completed' | 'skipped',
+          logs: sessionLogs,
+          total_volume: totalVolume,
+          duration_minutes: durationMinutes,
+        }
+      })
+
+      return sessionsWithLogs
+    } catch (err: unknown) {
+      error.value = (err as Error).message
+      return null
+    }
+  }
+
   return {
     workouts,
     currentWorkout,
@@ -290,5 +358,6 @@ export const useWorkouts = () => {
     startSession,
     completeSession,
     logSet,
+    fetchRecentSessions,
   }
 }
